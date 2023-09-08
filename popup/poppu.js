@@ -11,7 +11,14 @@ let interval;
 const buttonSound = new Audio('../audios/button-sound.mp3');
 const mainButton = document.getElementById('js-btn');
 mainButton.addEventListener('click', () => {
-  buttonSound.play();
+  // buttonSound.play();
+  let options = {
+    type: 'basic',
+    title: 'Basic Notification',
+    message: 'This is a Basic Notification',
+    iconUrl: '../images/icon-32.png',
+  };
+  chrome.notifications.create(options);
   const { action } = mainButton.dataset;
   if (action === 'start') {
     startTimer();
@@ -154,3 +161,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   switchMode('work');
 });
+
+function setAlarm(event) {
+  // const minutes = parseFloat(event.target.value);
+  const minutes = parseFloat(event * 0.1);
+  // chrome.action.setBadgeText({ text: 'ON' });
+  // chrome.alarms.create({ delayInMinutes: minutes });
+  chrome.storage.sync.set({ minutes: minutes });
+  // window.close();
+}
+
+function clearAlarm() {
+  chrome.action.setBadgeText({ text: '' });
+  chrome.alarms.clearAll();
+  window.close();
+}

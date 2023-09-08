@@ -9,7 +9,10 @@
       "js": ["scripts/content.js"]
     }
   ],
-  "permissions": ["storage", "activeTab", "scripting", "tabGroups"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage", "activeTab", "scripting", "alarms", "notifications"],
   "action": {
     "default_popup": "popup/popup.html",
     "default_icon": {
